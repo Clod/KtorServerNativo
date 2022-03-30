@@ -94,7 +94,13 @@ Nada que ver con esto pero se ponía la pantalla negra. Se arregló seteando:
 
 Settings > System > Acceleration -> Default
 
-2) Instalé Java:
+Descargo GraalVM (graalvm-ce-java17-linux-amd64-22.0.0.2.tar.gz) de: 
+
+https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.0.0.2
+
+y lo descomprimo en mi /home (medio desprolijo pero bué... es desarrollo)
+
+2) Instalé Java (NO HACE FALTA)
 sudo apt install openjdk-17-jdk-headless (creo que la pedo porque GraalVM ya tiene un JDK)
 
 en .bashrc de mi home definí las variables de entorno:
@@ -104,6 +110,8 @@ en .bashrc de mi home definí las variables de entorno:
     export GRAALVM_HOME=/home/claudio/graalvm-ce-java17-22.0.0.2
     
     PATH=$PATH:/home/claudio/graalvm-ce-java17-22.0.0.2/bin
+
+hacer source .bashrc para que lo tome.
 
 3) Instalé native-image 
 
@@ -117,4 +125,20 @@ sudo apt install gcc
 
    sudo apt-get install zlib1g-dev
 
-y finalmente me armó el ejecutable que funcionó!!!!
+Armo el JAR con ls
+
+claudio@claudio-VirtualBox:~/IdeaProjects/KtorServerNativo$ chmod +x  gradlew
+claudio@claudio-VirtualBox:~/IdeaProjects/KtorServerNativo$ ./gradlew build
+
+y finalmente me armó el ejecutable con:
+   
+   chmod +x build.sh
+   ./build.sh
+
+claudio@claudio-VirtualBox:~/IdeaProjects/KtorServerNativo$ ./graal-server
+
+Y funcionó!!!!
+
+Ahora lo FTPeo al Hosting para probar (OJO, COMO BINARIO)
+
+Con md5sum valido que haya pasado bien.
